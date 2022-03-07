@@ -11,6 +11,7 @@ namespace WebApplicationNet5
         public static void Show1(IConfiguration configurtion)
         {
             Console.WriteLine("Show1=" + configurtion["Logging:LogLevel:Default"]);
+
             var configRoot = (IConfigurationRoot)configurtion;
             foreach (var provider in configRoot.Providers)
             {
@@ -22,6 +23,7 @@ namespace WebApplicationNet5
         {
             LogLevelOptions options = new LogLevelOptions();
             configurtion.Bind("Logging:LogLevel", options);
+
             Console.WriteLine("Show2=" + options.Default);
         }
 
@@ -30,8 +32,12 @@ namespace WebApplicationNet5
             services.Configure<LogLevelOptions>(configurtion.GetSection("Logging:LogLevel"));
 
             //构造函数注入或手动获取注册对象
-            IOptionsMonitor<LogLevelOptions> optionsMonitor = null;
-            IOptions<LogLevelOptions> options = null;
+            var provider = services.BuildServiceProvider();
+            var logLevelOptions1 = provider.GetService<IOptionsMonitor<LogLevelOptions>>();
+            var logLevelOptions2 = provider.GetService<IOptions<LogLevelOptions>>();
+
+            IOptionsMonitor<LogLevelOptions> optionsMonitor = logLevelOptions1;
+            IOptions<LogLevelOptions> options = logLevelOptions2;
 
             Console.WriteLine("Show3_1=" + optionsMonitor.CurrentValue.Default);
             Console.WriteLine("Show3_2=" + options.Value.Default);

@@ -18,6 +18,7 @@ namespace WebApplicationNet5
             Configuration = configuration;
 
             ConfigurationTest.Show1(Configuration);
+            ConfigurationTest.Show2(Configuration);
         }
 
         public IConfiguration Configuration { get; }
@@ -26,6 +27,8 @@ namespace WebApplicationNet5
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            ConfigurationTest.Show3(services, Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
