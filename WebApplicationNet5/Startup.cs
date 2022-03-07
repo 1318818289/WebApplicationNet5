@@ -16,6 +16,8 @@ namespace WebApplicationNet5
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            ConfigurationTest.Show1(Configuration);
         }
 
         public IConfiguration Configuration { get; }
