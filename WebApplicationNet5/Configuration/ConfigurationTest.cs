@@ -39,8 +39,8 @@ namespace WebApplicationNet5
             IOptionsMonitor<LogLevelOptions> optionsMonitor = logLevelOptions1;
             IOptions<LogLevelOptions> options = logLevelOptions2;
 
-            Console.WriteLine("Show3-1=" + optionsMonitor.CurrentValue.Default);
-            Console.WriteLine("Show3-2=" + options.Value.Default);
+            Console.WriteLine("Show3_1=" + optionsMonitor.CurrentValue.Default);
+            Console.WriteLine("Show3_2=" + options.Value.Default);
 
         }
 
